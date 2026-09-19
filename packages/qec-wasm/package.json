@@ -1,0 +1,17 @@
+{
+  "name": "qec_engine",
+  "type": "module",
+  "description": "High-performance Rust/Wasm quantum error correction simulation and decoding engine",
+  "version": "0.1.0",
+  "license": "MIT OR Apache-2.0",
+  "files": [
+    "qec_engine_bg.wasm",
+    "qec_engine.js",
+    "qec_engine.d.ts"
+  ],
+  "main": "qec_engine.js",
+  "types": "qec_engine.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "learn-qec",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "web",
+    "video"
+  ],
+  "scripts": {
+    "build:wasm": "wasm-pack build crates/qec_engine --target web --out-dir ../../packages/qec-wasm",
+    "dev": "npm run dev --workspace=web",
+    "build": "npm run build --workspace=web",
+    "preview": "npm run preview --workspace=web",
+    "video:preview": "npm run preview --workspace=video",
+    "video:render": "npm run render --workspace=video"
+  }
+}

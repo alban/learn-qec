@@ -25,6 +25,7 @@ crates/qec_engine/pkg/
 DEVLOG.md
 DEVLOG/
 *.local.md
+scratch/
 
 # IDE / OS
 .vscode/
