@@ -1,7 +1,7 @@
 import React from 'react';
 import { ShorLatticeProps } from './types';
 
-export const ShorLattice: React.FC<ShorLatticeProps> = ({
+export const ShorLattice = React.forwardRef<SVGSVGElement, ShorLatticeProps>(({
   errors,
   syndromes,
   onQubitClick,
@@ -11,7 +11,7 @@ export const ShorLattice: React.FC<ShorLatticeProps> = ({
   className = '',
   width = '100%',
   height = 'auto',
-}) => {
+}, ref) => {
   // Qubit coordinates: 3 blocks spaced across 880px width
   const qubitPositions: { [key: number]: { x: number; y: number; block: number } } = {
     // Block 0 (cx = 170)
@@ -85,7 +85,9 @@ export const ShorLattice: React.FC<ShorLatticeProps> = ({
       style={{ width, height: height === 'auto' ? undefined : height }}
     >
       <svg
+        ref={ref}
         viewBox="0 0 880 520"
+        xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full overflow-visible"
       >
         <defs>
@@ -123,12 +125,17 @@ export const ShorLattice: React.FC<ShorLatticeProps> = ({
               strokeDasharray="4 4"
             />
 
-            {/* Block Header INSIDE the card at Y = 118, completely clear of bracket lines */}
+            {/* Block Header INSIDE the card at Y = 120, completely clear of bracket lines */}
             <text
               x={b.cx}
               y={120}
               textAnchor="middle"
-              className="text-[13px] font-black tracking-widest fill-slate-400 font-mono"
+              fill="#94A3B8"
+              fontFamily="ui-monospace, monospace"
+              fontSize="13px"
+              fontWeight="900"
+              letterSpacing="0.1em"
+              className="font-mono"
             >
               {b.title}
             </text>
@@ -202,9 +209,11 @@ export const ShorLattice: React.FC<ShorLatticeProps> = ({
                 x={xc.textX}
                 y={xc.textY + 4.5}
                 textAnchor="middle"
-                className={`text-[12px] font-bold font-mono ${
-                  isDefect ? 'fill-white' : 'fill-slate-200'
-                }`}
+                fill={isDefect ? '#FFFFFF' : '#E2E8F0'}
+                fontFamily="ui-monospace, monospace"
+                fontSize="12px"
+                fontWeight="bold"
+                className={`font-mono ${isDefect ? 'fill-white' : 'fill-slate-200'}`}
               >
                 {isDefect ? `DEFECT: ${xc.name} (Phase)` : `${xc.name}: ${xc.sublabel}`}
               </text>
@@ -231,9 +240,11 @@ export const ShorLattice: React.FC<ShorLatticeProps> = ({
                 x={zc.x}
                 y={zc.y + 4.5}
                 textAnchor="middle"
-                className={`text-[11px] font-bold font-mono ${
-                  isDefect ? 'fill-white' : 'fill-slate-300'
-                }`}
+                fill={isDefect ? '#FFFFFF' : '#CBD5E1'}
+                fontFamily="ui-monospace, monospace"
+                fontSize="11px"
+                fontWeight="bold"
+                className={`font-mono ${isDefect ? 'fill-white' : 'fill-slate-300'}`}
               >
                 {zc.label}
               </text>
@@ -286,8 +297,11 @@ export const ShorLattice: React.FC<ShorLatticeProps> = ({
                   x={0}
                   y={7}
                   textAnchor="middle"
-                  className="text-[19px] font-black font-mono select-none pointer-events-none"
                   fill={styling.text}
+                  fontFamily="ui-monospace, monospace"
+                  fontSize="19px"
+                  fontWeight="900"
+                  className="font-mono select-none pointer-events-none"
                 >
                   {styling.label}
                 </text>
@@ -296,7 +310,11 @@ export const ShorLattice: React.FC<ShorLatticeProps> = ({
                   x={0}
                   y={5}
                   textAnchor="middle"
-                  className="text-[14px] font-bold font-mono fill-slate-200 group-hover:fill-white select-none pointer-events-none"
+                  fill="#E2E8F0"
+                  fontFamily="ui-monospace, monospace"
+                  fontSize="14px"
+                  fontWeight="bold"
+                  className="font-mono select-none pointer-events-none group-hover:fill-white"
                 >
                   Q{qIdx}
                 </text>
@@ -308,7 +326,11 @@ export const ShorLattice: React.FC<ShorLatticeProps> = ({
                   x={17}
                   y={20}
                   textAnchor="start"
-                  className="text-[11px] font-bold font-mono fill-slate-200 select-none pointer-events-none"
+                  fill="#CBD5E1"
+                  fontFamily="ui-monospace, monospace"
+                  fontSize="11px"
+                  fontWeight="bold"
+                  className="font-mono select-none pointer-events-none"
                 >
                   Q{qIdx}
                 </text>
@@ -319,4 +341,6 @@ export const ShorLattice: React.FC<ShorLatticeProps> = ({
       </svg>
     </div>
   );
-};
+});
+
+ShorLattice.displayName = 'ShorLattice';

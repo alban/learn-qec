@@ -17,3 +17,4 @@ export interface ShorLatticeProps {
   width?: number | string;
   height?: number | string;
 }
+
